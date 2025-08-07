@@ -19,3 +19,16 @@ describe("Delimiter with multiple characters", () => {
         expect(calculator.add("//foo\n1foo2foo3")).toBe(6);
     });
 });
+
+describe("Multiple custom delimiters", () => {
+    const calculator = new Calculator();
+    test("'//[;][%]\n1;2%3' should evaluate to 6", () => {
+        expect(calculator.add("//[;][%]\n1;2%3")).toBe(6);
+    });
+    test("'//[***][%%]\n1***2%%3' should evaluate to 6", () => {
+        expect(calculator.add("//[***][%%]\n1***2%%3")).toBe(6);
+    });
+    test("'//[;][%][ooo]\n1;2%3;4' should evaluate to 10", () => {
+        expect(calculator.add("//[;][%][ooo]\n1;2%3;4ooo5")).toBe(15);
+    });
+});
