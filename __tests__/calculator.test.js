@@ -21,3 +21,12 @@ describe("Comma seperated expression", () => {
         expect(calculator.add("1,")).toBe(1);    
     })
 })
+describe("New line separated expression", () => {
+    const calculator = new Calculator();
+    test("'1\n2' should evaluate to 3", () => {
+        expect(calculator.add("1\n2")).toBe(3);
+    });
+    test("'1\n2,3' should evaluate to 6", () => {
+        expect(calculator.add("1\n2,3")).toBe(6);
+    });
+});
