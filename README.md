@@ -1,6 +1,9 @@
 # Calculator Kata
 
 A simple calculator project following Test-Driven Development (TDD) using JavaScript, ES6 modules, and Jest for testing.
+This has two branches 
+1. ***beginnerKata*** which covers basic TDD kata
+2. ***fullTDDKata*** which covers full TDD kata
 
 ## Features
 - Basic calculator functionality
