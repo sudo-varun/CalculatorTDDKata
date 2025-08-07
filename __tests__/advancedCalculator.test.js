@@ -9,3 +9,10 @@ describe("Numbers greater than 1000", () => {
         expect(calculator.add("1000,2000")).toBe(1000);
     });
 });
+
+describe("Delimiter with multiple characters", () => {
+    const calculator = new Calculator();
+    test("'//[***]\n1***2' should evaluate to 3", () => {
+        expect(calculator.add("//[***]\n1***2")).toBe(3);
+    });
+});
