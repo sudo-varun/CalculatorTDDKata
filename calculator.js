@@ -74,7 +74,8 @@ export default class Calculator {
      * @returns {string} The custom delimiter.
      */
     getCustomDelimiter(expression) {
-        return expression.charAt(2); // Custom delimiter is the character after '//' ie 2nd index
+        const match = expression.match(/\/\/\[(.+?)\]\n/);
+        return match ? match[1] : expression.charAt(2);
     }
     /**
      * Removes the custom delimiter from the expression.
