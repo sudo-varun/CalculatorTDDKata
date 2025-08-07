@@ -8,11 +8,12 @@ export default class Calculator {
         const regex = new RegExp(`[${this.defaultDelimiter}\\n]`);
         const numbers = expression.split(regex);
         let ans = 0;
+        const negativeNumbers = numbers.filter(num => parseInt(num) < 0);
+        if (negativeNumbers.length > 0) {
+            throw new Error(`Negative numbers not allowed: ${negativeNumbers.join(', ')}`);
+        }
         for (const number of numbers) {
             const num = parseInt(number);
-            if (num < 0) {
-                throw new Error(`Negative numbers not allowed: ${num}`);
-            }
             ans += num || 0;
         }
         return ans;
