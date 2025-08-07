@@ -1,0 +1,16 @@
+{
+  "name": "calculator-kata",
+  "version": "1.0.0",
+  "main": "calculator.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
+}
