@@ -3,7 +3,7 @@
 A simple calculator project following Test-Driven Development (TDD) using JavaScript, ES6 modules, and Jest for testing.
 
 ## Features
-- Basic calculator functionality (to be implemented via TDD)
+- Basic calculator functionality
 - ES6 module support
 - Jest for unit testing
 
