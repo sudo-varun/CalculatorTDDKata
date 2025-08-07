@@ -9,7 +9,11 @@ export default class Calculator {
         const numbers = expression.split(regex);
         let ans = 0;
         for (const number of numbers) {
-            ans += parseInt(number || 0);
+            const num = parseInt(number);
+            if (num < 0) {
+                throw new Error(`Negative numbers not allowed: ${num}`);
+            }
+            ans += num || 0;
         }
         return ans;
     }
