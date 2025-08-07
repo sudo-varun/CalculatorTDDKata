@@ -1,5 +1,5 @@
 export default class Calculator {
-    add() {
-        return 0;
+    add(expression) {
+        return parseInt(expression || 0);
     }
 }
