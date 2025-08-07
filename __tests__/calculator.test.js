@@ -8,4 +8,7 @@ describe('Calculator', () => {
     test("Single number should return the number", () => {
         expect(calculator.add("7")).toBe(7);
     })
+    test("comma seperated numbers in expression should evaluate to addition of numbers", () => {
+        expect(calculator.add("4,2")).toBe(6);
+    })
 });
