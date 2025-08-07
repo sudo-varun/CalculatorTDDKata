@@ -40,3 +40,16 @@ describe("Custom delimiter expression", () => {
         expect(calculator.add("//;\n1;2;3")).toBe(6);
     });
 });
+
+describe("Calling add with negative numbers", () => {
+    const calculator = new Calculator();
+    test("'1,-2' should throw an error", () => {
+        expect(() => calculator.add("1,-2")).toThrow("Negative numbers not allowed: -2");
+    });
+    test("'1\n-2' should throw an error", () => {
+        expect(() => calculator.add("1\n-2")).toThrow("Negative numbers not allowed: -2");
+    });
+    test("'//;\n1;-2;3' should throw an error", () => {
+        expect(() => calculator.add("//;\n1;-2;3")).toThrow("Negative numbers not allowed: -2");
+    });
+})
