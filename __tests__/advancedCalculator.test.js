@@ -15,4 +15,7 @@ describe("Delimiter with multiple characters", () => {
     test("'//[***]\n1***2' should evaluate to 3", () => {
         expect(calculator.add("//[***]\n1***2")).toBe(3);
     });
+    test("'//foo\n1foo2foo3' should evaluate to 6", () => {
+        expect(calculator.add("//foo\n1foo2foo3")).toBe(6);
+    });
 });

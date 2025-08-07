@@ -75,7 +75,9 @@ export default class Calculator {
      */
     getCustomDelimiter(expression) {
         const match = expression.match(/\/\/\[(.+?)\]\n/);
-        return match ? match[1] : expression.charAt(2);
+        return match ? match[1] : expression.split('\n')[0].substring(2); // expression starts with '//' 
+        // after splitting by new line, the array will look like ['//delimiter', 'numbers...']
+        // so we take the first element and remove the '//'
     }
     /**
      * Removes the custom delimiter from the expression.
