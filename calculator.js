@@ -7,8 +7,8 @@ export default class Calculator {
      * @throws {Error} Throws an error if negative numbers are provided
      */
 
-    defaultDelimiter = ','; // Default delimiter for numbers currently set to comma
-    
+    allDelimiters = ['\n']; // Default delimiter for numbers currently set to comma
+    defaultDelimiter = ",";
     /**
      * Adds the numbers in the given string.
      * @param {string} expression - The string containing numbers to add.
@@ -17,21 +17,24 @@ export default class Calculator {
      */
     add(expression) {
         if(this.hasCustomDelimiter(expression)) {
-            this.defaultDelimiter = this.getCustomDelimiter(expression);
+            this.allDelimiters = this.allDelimiters.concat(this.getCustomDelimiters(expression));
             expression = this.removeCustomDelimiter(expression);
         }
-        const numbers = this.getNumbers(expression);
+        const numbers = this.getNumbers(expression, this.allDelimiters.slice()); // Use a copy of the default delimiters
         this.throwIfNegativeNumbers(numbers);
         return this.calculate(numbers);
     }
     /**
-     * Splits the expression into numbers based on the default delimiter or new line.
-     * @param {string} expression - The string containing numbers to split.
-     * @returns {Array<string>} An array of number strings.
+     * Extracts numbers from the expression based on the provided delimiters.
+     * @param {string} currentExpression - The string containing numbers to extract.
+     * @param {Array<string>} delimiters - An array of delimiters to use for splitting the string.
+     * @returns {Array<string>} An array of number strings extracted from the
      */
-    getNumbers(expression) {
-        const regex = new RegExp(`[${this.defaultDelimiter}\\n]`); // Create a regex to split by default delimiter or new line
-        return expression.split(regex);
+    getNumbers(currentExpression, delimiters) {
+        for(const delimiter of delimiters) {
+            currentExpression = currentExpression.split(delimiter).join(this.defaultDelimiter);
+        }
+        return currentExpression.split(this.defaultDelimiter);
     }
 
 
@@ -73,11 +76,13 @@ export default class Calculator {
      * @param {string} expression - The string containing the custom delimiter.
      * @returns {string} The custom delimiter.
      */
-    getCustomDelimiter(expression) {
-        const match = expression.match(/\/\/\[(.+?)\]\n/);
-        return match ? match[1] : expression.split('\n')[0].substring(2); // expression starts with '//' 
-        // after splitting by new line, the array will look like ['//delimiter', 'numbers...']
-        // so we take the first element and remove the '//'
+    getCustomDelimiters(expression) {
+        const delimitersString = expression.split('\n')[0].substring(2); // Remove the '//'
+        if(/^\[.+\]$/.test(delimitersString)) {
+            // If the delimiter is in the format //[delimiter]
+            return delimitersString.substring(1, delimitersString.length - 1).split('][');
+        } 
+        return [delimitersString]; // If the delimiter is a single character, return it as an array
     }
     /**
      * Removes the custom delimiter from the expression.
