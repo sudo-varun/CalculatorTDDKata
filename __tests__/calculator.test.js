@@ -30,3 +30,13 @@ describe("New line separated expression", () => {
         expect(calculator.add("1\n2,3")).toBe(6);
     });
 });
+
+describe("Custom delimiter expression", () => {
+    const calculator = new Calculator();
+    test("'//;\n1;2' should evaluate to 3", () => {
+        expect(calculator.add("//;\n1;2")).toBe(3);
+    });
+    test("'//;\n1;2;3' should evaluate to 6", () => {
+        expect(calculator.add("//;\n1;2;3")).toBe(6);
+    });
+});
