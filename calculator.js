@@ -5,18 +5,19 @@ export default class Calculator {
             this.defaultDelimiter = this.getCustomDelimiter(expression);
             expression = this.removeCustomDelimiter(expression);
         }
-        const regex = new RegExp(`[${this.defaultDelimiter}\\n]`);
-        const numbers = expression.split(regex);
-        let ans = 0;
+        const numbers = this.getNumbers(expression);
         const negativeNumbers = numbers.filter(num => parseInt(num) < 0);
         if (negativeNumbers.length > 0) {
             throw new Error(`Negative numbers not allowed: ${negativeNumbers.join(', ')}`);
         }
-        for (const number of numbers) {
-            const num = parseInt(number);
-            ans += num || 0;
-        }
-        return ans;
+        return this.calculate(numbers);
+    }
+    getNumbers(expression) {
+        const regex = new RegExp(`[${this.defaultDelimiter}\\n]`);
+        return expression.split(regex);
+    }
+    calculate(numbers) {
+        return numbers.reduce((acc, num) => acc + (parseInt(num) || 0), 0);
     }
     hasCustomDelimiter(expression) {
         return expression.startsWith('//');
