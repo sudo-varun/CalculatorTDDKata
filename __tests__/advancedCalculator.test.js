@@ -1,3 +1,5 @@
+import Calculator from '../calculator';
+
 describe("Numbers greater than 1000", () => {
     const calculator = new Calculator();
     test("'1001,2' should evaluate to 2", () => {

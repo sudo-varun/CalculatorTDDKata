@@ -53,7 +53,10 @@ export default class Calculator {
      * @returns {number} The sum of the numbers.
      */
     calculate(numbers) {
-        return numbers.reduce((acc, num) => acc + (parseInt(num) || 0), 0);
+        return numbers.reduce((acc, num) => {
+            const number = parseInt(num || 0);
+            return number > 1000 ? acc : acc + number; // Ignore numbers greater than 1000
+        }, 0);
     }
 
     /**
