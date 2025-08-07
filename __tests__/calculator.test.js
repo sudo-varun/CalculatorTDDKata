@@ -10,5 +10,6 @@ describe('Calculator', () => {
     })
     test("comma seperated numbers in expression should evaluate to addition of numbers", () => {
         expect(calculator.add("4,2")).toBe(6);
+        expect(calculator.add("4,2,1")).toBe(7);
     })
 });
